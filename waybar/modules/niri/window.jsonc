@@ -1,0 +1,12 @@
+{
+	"niri/window": {
+		"format": "{title}",
+		"rewrite": {
+			"": "Desktop",
+			"kitty": "Terminal",
+			"zsh": "Terminal",
+			"~": "Terminal"
+		},
+		"swap-icon-label": false
+	}
+}

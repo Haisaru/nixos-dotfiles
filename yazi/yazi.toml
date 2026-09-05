@@ -1,0 +1,46 @@
+# Yazi Configuration - Aesthetic & Fast
+[manager]
+ratio          = [ 1, 4, 3 ]
+sort_by        = "alphabetical"
+sort_sensitive = false
+sort_reverse   = false
+sort_dir_first = true
+linemode       = "size"
+show_hidden    = false
+show_symlink   = true
+scrolloff      = 5
+mouse_events   = [ "click", "scroll" ]
+title_format   = "Yazi: {cwd}"
+
+[opener]
+edit = [
+	{ run = 'nvim "$@"', block = true, for = "unix" },
+]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open with default app" },
+]
+
+[open]
+rules = [
+	{ url = "*/", use = [ "edit", "open" ] },
+	{ mime = "text/*", use = [ "edit", "open" ] },
+	{ mime = "image/*", use = [ "open" ] },
+	{ mime = "{audio,video}/*", use = [ "play" ] },
+	{ mime = "application/json", use = [ "edit", "open" ] },
+	{ url = "*", use = [ "open" ] },
+]
+
+[preview]
+tab_size        = 2
+max_width       = 600
+max_height      = 900
+cache_dir       = ""
+image_filter    = "triangle"
+image_delay     = 30
+image_quality   = 75
+sixel_fraction  = 15
+ueberzug_scale  = 1
+ueberzug_offset = [ 0, 0, 0, 0 ]

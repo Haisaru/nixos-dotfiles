@@ -1,0 +1,49 @@
+/* ── State colors ─────────────────────────────────── */
+
+#memory.warning,
+#cpu.warning,
+#battery.warning {
+	color: @warning;
+}
+
+#temperature.critical,
+#memory.critical,
+#cpu.critical,
+#battery.critical {
+	color: @critical;
+}
+
+#battery.charging {
+	color: @charging;
+}
+
+/* Hover states */
+#custom-power:hover {
+	color: @fg;
+}
+
+#clock.date:hover,
+#mpris:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#backlight:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover {
+	color: @fg;
+}
+
+/* ── Inactive / muted states ─────────────────────── */
+#mpris.paused {
+	color: @muted;
+}
+
+#pulseaudio.output.muted,
+#pulseaudio.input.source-muted,
+#wireplumber.muted {
+	color: @muted;
+}
+
+#idle_inhibitor.deactivated {
+	color: @muted;
+}
