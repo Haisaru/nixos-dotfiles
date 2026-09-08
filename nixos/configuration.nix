@@ -22,7 +22,7 @@
     enable = true;
     settings = {
       animation = "gameoflife";
-      animate = false;
+      animate = true;
       clock = "%a %d %b %H:%M:%S";
       hide_borders = false;
       margin_h = 2;
