@@ -22,7 +22,7 @@
     enable = true;
     settings = {
       animation = "gameoflife";
-      animate = "gameoflife";
+      animate = false;
       clock = "%a %d %b %H:%M:%S";
       hide_borders = false;
       margin_h = 2;
@@ -180,6 +180,15 @@
         emoji = [ "Noto Color Emoji" ];
       };
     };
+  };
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
+
+  nix.gc = {
+    automatic = true;
+    options = "--delete older-than 14d";
   };
 
 
