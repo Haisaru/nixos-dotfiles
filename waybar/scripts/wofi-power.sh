@@ -9,7 +9,7 @@ selected=$(echo -e "$entries" | wofi \
     --width 220 \
     --height 232 \
     --insensitive \
-    --style /home/nico/.config/wofi/power.css \
+    --style /home/jason/.config/wofi/power.css \
     --cache-file /dev/null)
 
 case "$selected" in

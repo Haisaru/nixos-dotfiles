@@ -23,6 +23,7 @@
     settings = {
       animation = "gameoflife";
       animate = true;
+      animation_frame_delay = 30;
       clock = "%a %d %b %H:%M:%S";
       hide_borders = false;
       margin_h = 2;
@@ -198,66 +199,76 @@
   # ==========================================
   environment.systemPackages = with pkgs; [
     # Terminal & Shell
-    kitty
-    zsh
-    zsh-powerlevel10k
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-autocomplete
-    fzf
-    zoxide
-    eza
     bat
-    fastfetch
     btop
     cava
-    yazi
-    ripgrep
+    eza
+    fastfetch
     fd
-    unzip
-    tree-sitter
+    fzf
+    kitty
+    ripgrep
     shfmt
     stylua
+    tree-sitter
+    unzip
     wget
+    yazi
+    zoxide
+    zsh
+    zsh-autocomplete
+    zsh-autosuggestions
+    zsh-powerlevel10k
+    zsh-syntax-highlighting
 
     # Development Tools & Compilers
-    gcc
     cargo
-    rustc
+    gcc
     gh
     git
+    lazygit
     neovim
+    rustc
+    texliveFull
     vim
 
     # Applications & Media
-    kdePackages.dolphin
+    anki-bin
     firefox
+    hunspell
+    hunspellDicts.en_CA
+    hunspellDicts.en_US
+    kdePackages.dolphin
+    libreoffice-qt
     librewolf
-    vesktop
-    ncspot
     mpv
+    ncspot
+    sioyek
+    vesktop
+    zathura
 
     # Wayland & Desktop Utilities
-    waybar
-    wofi
-    fuzzel
-    libnotify
-    swaybg
-    grim
-    slurp
-    satty
-    wl-clipboard
-    cliphist
     brightnessctl
-    playerctl
-    pavucontrol
-    networkmanagerapplet
-    xdg-utils
+    cliphist
     dconf
-
+    fuzzel
+    grim
+    libnotify
+    networkmanagerapplet
+    pavucontrol
+    playerctl
+    satty
+    slurp
+    swaybg
+    trash-cli
+    waybar
+    wl-clipboard
+    wofi
+    xdg-utils
+    
     # Power Management Tools
-    tlp
     powertop
+    tlp
   ];
 
   system.stateVersion = "26.05"; # Do not touch

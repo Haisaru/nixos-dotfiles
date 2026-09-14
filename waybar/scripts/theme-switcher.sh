@@ -541,7 +541,7 @@ WOFIP
     # 8. Fuzzel
     cat << 'FUZZEL' > "$CONFIG_DIR/fuzzel/fuzzel.ini"
 font=JetBrainsMono Nerd Font:size=11
-prompt="nico@nixos:~$ "
+prompt="jason@nixos:~$ "
 icon-theme=Papirus-Dark
 icons-enabled=no
 terminal=kitty -e
@@ -1158,7 +1158,7 @@ WOFIP
     # 8. Fuzzel
     cat << 'FUZZEL' > "$CONFIG_DIR/fuzzel/fuzzel.ini"
 font=JetBrainsMono Nerd Font:size=11
-prompt="nico@nixos:~$ "
+prompt="jason@nixos:~$ "
 icon-theme=Papirus-Dark
 icons-enabled=no
 terminal=kitty -e
@@ -1795,7 +1795,7 @@ WOFIP
     # 8. Fuzzel
     cat << 'FUZZEL' > "$CONFIG_DIR/fuzzel/fuzzel.ini"
 font=JetBrainsMono Nerd Font:size=11
-prompt="nico@nixos:~$ "
+prompt="jason@nixos:~$ "
 icon-theme=Papirus-Dark
 icons-enabled=no
 terminal=kitty -e

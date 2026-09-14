@@ -17,7 +17,6 @@
 
 	"modules-left": [
 		"custom/distro",
-		"custom/themeswitcher",
 		"niri/workspaces",
 		"mpris"
 	],
