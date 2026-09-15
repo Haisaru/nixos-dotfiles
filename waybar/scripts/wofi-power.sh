@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # Power menu entries with nerd font icons — terminal style
-entries=" Lock\n󰍃 Logout\n󰒲 Suspend\n󰑐 Reboot\n⏻ Shutdown"
+entries=" Lock\n󰍃 Logout\n󰒲 Suspend\n󰑐 Reboot\n⏻ Shutdown"
 
 selected=$(echo -e "$entries" | wofi \
     --dmenu \
     --prompt "  power" \
     --width 220 \
-    --height 232 \
+    --height 270 \
     --insensitive \
     --style /home/jason/.config/wofi/power.css \
     --cache-file /dev/null)
