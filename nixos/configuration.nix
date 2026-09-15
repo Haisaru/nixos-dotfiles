@@ -260,6 +260,7 @@
     satty
     slurp
     swaybg
+    swaylock
     trash-cli
     waybar
     wl-clipboard

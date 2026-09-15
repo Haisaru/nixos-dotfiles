@@ -13,7 +13,7 @@ selected=$(echo -e "$entries" | wofi \
     --cache-file /dev/null)
 
 case "$selected" in
-    *"Lock"*)     loginctl lock-session ;;
+    *"Lock"*)     swaylock -f ;;
     *"Logout"*)   niri msg action quit --skip-confirmation 2>/dev/null || pkill -SIGTERM niri ;;
     *"Suspend"*)  systemctl suspend ;;
     *"Reboot"*)   systemctl reboot ;;

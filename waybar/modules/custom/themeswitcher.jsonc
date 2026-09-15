@@ -1,8 +1,0 @@
-{
-	"custom/themeswitcher": {
-		"format": "󰏘",
-		"tooltip-format": "<b>Theme Switcher</b>\n󰏘 Left click: Choose Theme (Menu)\n󱐋 Right click: Next Theme",
-		"on-click": "/home/jason/.config/waybar/scripts/theme-switcher.sh menu",
-		"on-click-right": "/home/jason/.config/waybar/scripts/theme-switcher.sh next"
-	}
-}

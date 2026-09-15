@@ -2,7 +2,7 @@
 	"custom/power": {
 		"format": "󰤄",
 		"on-click": "/home/jason/.config/waybar/scripts/wofi-power.sh",
-		"on-click-right": "loginctl lock-session",
+		"on-click-right": "swaylock -f",
 		"tooltip-format": "Power Menu\n<i>Left click: Power menu\nRight click: Lock screen</i>"
 	}
 }

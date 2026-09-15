@@ -17,7 +17,6 @@
 
 	"modules-left": [
 		"custom/distro",
-		"custom/themeswitcher",
 		"niri/workspaces",
 		"mpris"
 	],
@@ -33,6 +32,8 @@
 		"group/pulseaudio",
 		"backlight",
 		"battery",
+    "bluetooth",
+    "network",
 		"custom/power"
 	]
 }
