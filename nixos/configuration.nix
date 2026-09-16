@@ -226,6 +226,7 @@
     claude-code
     claude-monitor
     claude-powerline
+    elan
     gcc
     gh
     git
