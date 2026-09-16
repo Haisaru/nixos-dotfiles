@@ -223,7 +223,9 @@
 
     # Development Tools & Compilers
     cargo
-    elan
+    claude-code
+    claude-monitor
+    claude-powerline
     gcc
     gh
     git
@@ -273,8 +275,5 @@
     powertop
     tlp
   ];
-
   system.stateVersion = "26.05"; # Do not touch
-
 }
-
