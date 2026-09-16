@@ -223,9 +223,11 @@
 
     # Development Tools & Compilers
     cargo
+    elan
     gcc
     gh
     git
+    gnumake
     lazygit
     neovim
     rustc
