@@ -93,8 +93,25 @@ vim.pack.add({
 ---------------------------------------------------------------------------
 -- Configuration
 ---------------------------------------------------------------------------
-
-require("plugins")
+-- Auto-require every other file in this directory (lua/plugins/*.lua),
+-- instead of listing each one by hand. Runs in alphabetical order; prefix a
+-- filename with e.g. "00-" if something genuinely needs to load first.
+do
+  local this_file = "init.lua"
+  local dir = vim.fn.stdpath("config") .. "/lua/plugins"
+  local files = vim.fn.readdir(dir, [[v:val =~ '\.lua$']])
+  table.sort(files)
+ 
+  for _, file in ipairs(files) do
+    if file ~= this_file then
+      local mod = "plugins." .. file:gsub("%.lua$", "")
+      local ok, err = pcall(require, mod)
+      if not ok then
+        vim.notify(("[plugins] failed to load %s\n%s"):format(mod, err), vim.log.levels.ERROR)
+      end
+    end
+  end
+end
 require("vim-options")
 
 ---------------------------------------------------------------------------
