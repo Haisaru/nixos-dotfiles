@@ -18,10 +18,9 @@
 	},
 
 	"clock#date": {
-		"timezone": "America/Argentina/Buenos_Aires",
-		"format": "󰸗 {:%d-%m}",
+		"timezone": "",
+		"format": "󰸗 {:%m-%d-%y}",
 		"min-length": 8,
-		"max-length": 8,
 		"tooltip-format": "{calendar}",
 		"calendar": {
 			"mode": "month",
