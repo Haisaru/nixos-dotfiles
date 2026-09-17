@@ -1,5 +1,14 @@
 // Niri configuration - Aesthetic Square Dark Theme
 // Documentation: https://niri-wm.github.io/niri/
+//
+// MODIFIER GRAMMAR (applies to all directional keys: arrows, HJKL, Page_Up/Down)
+//   Mod                -> focus / act on the focused window
+//   Mod+Shift          -> move the window or column
+//   Mod+Ctrl           -> monitors
+//   Mod+Ctrl+Shift     -> send the column to another monitor
+//   Mod+Alt            -> act on the whole workspace
+//   Mod+Ctrl+Alt       -> send the whole workspace to another monitor
+// Non-directional chords (Mod+F, Mod+R, ...) are plain mnemonics.
 
 input {
     keyboard {
@@ -10,8 +19,77 @@ input {
     }
     touchpad {
         tap
+        // dwt          // disable touchpad while typing
+        natural-scroll
     }
+
+    // Multi-monitor quality of life. Uncomment what you like:
+    // Jump the pointer to whatever window you focus. Makes Mod+Ctrl+L
+    // (focus other monitor) actually move your cursor there too.
+    // warp-mouse-to-focus mode="center-xy"
+
+    // Focus windows/outputs by hovering, but never if it would scroll the view.
+    // focus-follows-mouse max-scroll-amount="0%"
+
+    // Pressing Mod+2 twice returns you to the workspace you came from.
+    // workspace-auto-back-and-forth
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MONITORS
+// ─────────────────────────────────────────────────────────────────────────────
+// Run `niri msg outputs` inside niri to get exact names, modes and refresh
+// rates, then fill these in. Names are either connector names (eDP-1, DP-1,
+// HDMI-A-1) or "Manufacturer Model Serial". Matching is case-insensitive.
+//
+// `mode` refresh rates must match to THREE decimal places, e.g.
+// "2560x1440@143.912" - not "@144". Omit `mode` entirely to let niri pick.
+//
+// `position` is in LOGICAL pixels: logical width = pixel width / scale.
+// A 3840x2160 monitor at scale 2.0 is 1920 logical wide, so the monitor to its
+// right goes at x=1920. If positions overlap or are unset, niri auto-places
+// outputs left to right sorted by name.
+
+output "eDP-1" {
+    // mode "1920x1080@60.000"
+    // scale 1.0            // leave unset to let niri guess from DPI
+    position x=0 y=0
+}
+
+output "HDMI-A-1" {
+    // mode "2560x1440@143.912"
+    // scale 1.0
+    position x=1920 y=0
+    focus-at-startup        // start focused here; falls back if not connected
+    variable-refresh-rate on-demand=true
+}
+
+// Example third monitor, rotated vertical, with layout tweaks only for it.
+// output "HDMI-A-1" {
+//     transform "90"
+//     position x=4480 y=0
+//
+//     layout {
+//         default-column-width { proportion 1.0; }
+//         always-center-single-column false
+//     }
+// }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// WORKSPACES
+// ─────────────────────────────────────────────────────────────────────────────
+// IMPORTANT: in niri each monitor has its OWN vertical stack of workspaces, and
+// Mod+1..9 addresses "the Nth workspace on the monitor I'm looking at right
+// now" - not a global workspace 1. If you want a workspace pinned to a
+// specific monitor, name it here and bind it by name instead.
+//
+// workspace "web" {
+//     open-on-output "DP-1"
+// }
+// workspace "chat" {
+//     open-on-output "eDP-1"
+// }
+// Then bind: Mod+Grave { focus-workspace "web"; }
 
 // Layout & Decorations
 layout {
@@ -47,6 +125,9 @@ layout {
     }
 }
 
+// These are only the GLOBAL blur parameters. Blur does nothing until a window
+// or layer rule turns it on with `background-effect { blur true }` (see below),
+// and it is only visible through a semi-transparent surface.
 blur {
     passes 3
     offset 3
@@ -100,6 +181,40 @@ window-rule {
     default-column-width { proportion 1.0; }
 }
 
+// Blur behind the terminal. Needs kitty's own background_opacity < 1.0 set in
+// kitty.conf, otherwise the opaque window just covers the blur.
+// window-rule {
+//     match app-id="^kitty$"
+//     opacity 0.92
+//     background-effect {
+//         blur true
+//     }
+// }
+
+// Blur behind shell surfaces. Harmless if the surface is opaque - you'll just
+// see no change until you add transparency in waybar's CSS / fuzzel.ini / etc.
+// Check your actual namespaces with `niri msg layers` if these don't match.
+layer-rule {
+    match namespace="^waybar$"
+    background-effect {
+        blur true
+    }
+}
+
+layer-rule {
+    match namespace="^launcher$"      // fuzzel
+    background-effect {
+        blur true
+    }
+}
+
+layer-rule {
+    match namespace="^notifications$" // mako
+    background-effect {
+        blur true
+    }
+}
+
 binds {
     // Hotkey overlay & Inhibit
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -115,12 +230,21 @@ binds {
     Ctrl+Shift+Escape hotkey-overlay-title="Task Manager" { spawn "kitty" "-e" "btop"; }
     Mod+X      hotkey-overlay-title="Power Menu" { spawn "/home/jason/.config/waybar/scripts/wofi-power.sh"; }
 
+    // Screen lock. You have no lock bind at all right now - pick a locker you
+    // actually have installed, then uncomment. allow-inhibiting=false means a
+    // misbehaving app (or a VM) can never swallow this one.
+    // Super+Alt+L allow-inhibiting=false hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
+
     // Window Management
-    Mod+Q      { close-window; }
-    Mod+Shift+C { center-column; }
-    Mod+V      { toggle-window-floating; }
-    Mod+F      { maximize-column; }
+    Mod+Q       { close-window; }
+    Mod+C       { center-column; }
+    Mod+Shift+C { center-visible-columns; }
+    Mod+V       { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+F       { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+F  { expand-column-to-available-width; }
+    Mod+Shift+W { toggle-column-tabbed-display; }
 
     // Focus navigation
     Mod+Left   { focus-column-left; }
@@ -128,9 +252,12 @@ binds {
     Mod+Up     { focus-window-up; }
     Mod+Down   { focus-window-down; }
     Mod+H      { focus-column-left; }
-    Mod+K      { focus-window-up; }
     Mod+J      { focus-window-down; }
+    Mod+K      { focus-window-up; }
     Mod+L      { focus-column-right; }
+
+    Mod+Home   { focus-column-first; }
+    Mod+End    { focus-column-last; }
 
     // Window movement
     Mod+Shift+Left  { move-column-left; }
@@ -142,12 +269,18 @@ binds {
     Mod+Shift+K     { move-window-up; }
     Mod+Shift+L     { move-column-right; }
 
-    // Column resizing & width presets
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Home  { move-column-to-first; }
+    Mod+Shift+End   { move-column-to-last; }
+
+    // Column resizing & presets
+    // Mod = width, Mod+Shift = height. Consistent across -/= and R.
+    Mod+Minus       { set-column-width "-10%"; }
+    Mod+Equal       { set-column-width "+10%"; }
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
-    Mod+Shift+R { switch-preset-column-width; }
+    Mod+R           { switch-preset-column-width; }
+    Mod+Shift+R     { switch-preset-window-height; }
+    Mod+Ctrl+R      { reset-window-height; }
 
     // Column window grouping (consume/expel)
     Mod+BracketLeft  { consume-or-expel-window-left; }
@@ -155,7 +288,7 @@ binds {
     Mod+Comma        { consume-window-into-column; }
     Mod+Period       { expel-window-from-column; }
 
-    // Workspaces
+    // Workspaces (vertical, per monitor)
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -176,15 +309,61 @@ binds {
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
 
-    Mod+Ctrl+Left  { focus-workspace-down; }
-    Mod+Ctrl+Right { focus-workspace-up; }
-    Mod+Page_Down  { focus-workspace-down; }
-    Mod+Page_Up    { focus-workspace-up; }
+    Mod+Tab       { focus-workspace-previous; }
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up   { focus-workspace-up; }
+    Mod+U         { focus-workspace-down; }
+    Mod+I         { focus-workspace-up; }
 
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+    Mod+Shift+U         { move-column-to-workspace-down; }
+    Mod+Shift+I         { move-column-to-workspace-up; }
+
+    // Reorder the whole workspace within its monitor (Alt = whole workspace)
+    Mod+Alt+Page_Down { move-workspace-down; }
+    Mod+Alt+Page_Up   { move-workspace-up; }
+    Mod+Alt+U         { move-workspace-down; }
+    Mod+Alt+I         { move-workspace-up; }
+
+    // ── Monitors ────────────────────────────────────────────────────────────
+    // Focus another monitor. Directions follow the `position` values above, so
+    // if left/right feel backwards, your output positions are backwards.
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+    Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Down  { focus-monitor-down; }
+    Mod+Ctrl+H     { focus-monitor-left; }
+    Mod+Ctrl+J     { focus-monitor-down; }
+    Mod+Ctrl+K     { focus-monitor-up; }
+    Mod+Ctrl+L     { focus-monitor-right; }
+    Mod+Ctrl+Tab   { focus-monitor-previous; }
+
+    // Send the focused column to another monitor.
+    Mod+Ctrl+Shift+Left  { move-column-to-monitor-left; }
+    Mod+Ctrl+Shift+Right { move-column-to-monitor-right; }
+    Mod+Ctrl+Shift+Up    { move-column-to-monitor-up; }
+    Mod+Ctrl+Shift+Down  { move-column-to-monitor-down; }
+    Mod+Ctrl+Shift+H     { move-column-to-monitor-left; }
+    Mod+Ctrl+Shift+J     { move-column-to-monitor-down; }
+    Mod+Ctrl+Shift+K     { move-column-to-monitor-up; }
+    Mod+Ctrl+Shift+L     { move-column-to-monitor-right; }
+
+    // Send the entire workspace to another monitor.
+    Mod+Ctrl+Alt+Left  { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Alt+Right { move-workspace-to-monitor-right; }
+    Mod+Ctrl+Alt+H     { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Alt+L     { move-workspace-to-monitor-right; }
+
+    Mod+Shift+P { power-off-monitors; }
+
+    // Scroll bindings
+    Mod+WheelScrollDown        cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp          cooldown-ms=150 { focus-workspace-up; }
+    Mod+Shift+WheelScrollDown  cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp    cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+WheelScrollRight       { focus-column-right; }
+    Mod+WheelScrollLeft        { focus-column-left; }
 
     // Overview
     Mod+O repeat=false { toggle-overview; }
@@ -209,7 +388,7 @@ binds {
     XF86AudioNext  allow-when-locked=true { spawn "playerctl" "next"; }
     XF86AudioPrev  allow-when-locked=true { spawn "playerctl" "previous"; }
 
-    // Quit session
+    // Quit session (both show a confirmation dialog first)
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
 }
