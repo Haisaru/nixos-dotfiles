@@ -34,6 +34,7 @@
   };
 
   programs.niri.enable = true;
+  programs.hyprland.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -259,6 +260,7 @@
     fuzzel
     grim
     libnotify
+    mako
     networkmanagerapplet
     pavucontrol
     playerctl
