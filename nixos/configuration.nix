@@ -255,6 +255,7 @@
     zathura
 
     # Wayland & Desktop Utilities
+    bibata-cursors
     brightnessctl
     cliphist
     dconf
@@ -279,5 +280,9 @@
     powertop
     tlp
   ];
+  environment.variables = {
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
+  };
   system.stateVersion = "26.05"; # Do not touch
 }
