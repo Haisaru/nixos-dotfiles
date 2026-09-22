@@ -12,13 +12,13 @@
 	"include": [
 		"~/.config/waybar/modules/custom/*.jsonc",
 		"~/.config/waybar/modules/niri/*.jsonc",
-		"~/.config/waybar/modules/hypr/*.jsonc",
+		"~/.config/waybar/modules/hyprland/*.jsonc",
 		"~/.config/waybar/modules/*.jsonc"
 	],
 
 	"modules-left": [
 		"custom/distro",
-		"hypr/workspaces",
+		"hyprland/workspaces",
 		"niri/workspaces",
 		"mpris"
 	],
