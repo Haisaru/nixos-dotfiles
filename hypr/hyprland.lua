@@ -30,6 +30,10 @@ local term = "kitty"
 local launcher = "fuzzel"
 local browser = "librewolf"
 
+cursor = {
+    enable_hyprcursor = false,
+}
+
 ----------------------
 ---- MONITORS      ----
 ----------------------
@@ -102,10 +106,9 @@ hl.config({
         },
     },
     animations = {
-        enabled = true,
+        enabled = false,
     },
     dwindle = {
-        pseudotile = true,
         preserve_split = true,
     },
     misc = {
