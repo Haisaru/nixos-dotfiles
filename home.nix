@@ -13,6 +13,7 @@
     ".config/cava/"= { source = ./cava; recursive = true;};
     ".config/fastfetch/"= { source = ./fastfetch; recursive = true;};
     ".config/fuzzel/"= { source = ./fuzzel; recursive = true;};
+    ".config/hyprland/"= { source = ./hyprland; recursive = true;};
     ".config/kitty/"= { source = ./kitty; recursive = true;};
     ".config/nvim/"= { source = ./nvim; recursive = true;};
     ".config/niri/"= { source = ./niri; recursive = true;};

@@ -84,6 +84,7 @@ vim.pack.add({
   { src = "https://github.com/folke/todo-comments.nvim" },
   { src = "https://github.com/folke/trouble.nvim" },
   { src = "https://github.com/akinsho/toggleterm.nvim" },
+  { src = "https://github.com/abecodes/tabout.nvim" },
 
   -- language / task specific
   { src = "https://github.com/xeluxee/competitest.nvim" },

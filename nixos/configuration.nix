@@ -234,6 +234,7 @@
     gnumake
     lazygit
     neovim
+    resvg
     rustc
     texliveFull
     vim
