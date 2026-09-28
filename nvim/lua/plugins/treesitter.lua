@@ -1,11 +1,19 @@
 local langs = {
   "c",
+  "cpp",
+  "haskell",
+  "html",
+  "javascript",
+  "latex",
+  "lean",
   "lua",
+  "python",
+  "query",
+  "toml",
+  "typescript",
   "vim",
   "vimdoc",
-  "query",
-  "javascript",
-  "html",
+  "zig",
 }
 
 require("nvim-treesitter").install(langs)
