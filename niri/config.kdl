@@ -139,7 +139,7 @@ blur {
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "swaybg" "-i" "/home/jason/dotfiles/assets/active.jpg" "-m" "fill"
-spawn-at-startup "/home/jason/.config/niri/clipboard-watch.sh"
+spawn-at-startup "/home/jason/.config/scripts/clipboard-watch.sh"
 spawn-sh-at-startup "dbus-update-activation-environment --systemd --all"
 spawn-sh-at-startup "xhost +SI:localuser:root 2>/dev/null || true"
 
@@ -368,10 +368,11 @@ binds {
     Mod+O repeat=false { toggle-overview; }
 
     // Screenshots
-    Print      { spawn "/home/jason/.config/niri/screenshot.sh" "region"; }
-    Mod+Print  { spawn "/home/jason/.config/niri/screenshot.sh" "screen"; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print  { screenshot-window; }
+    Print           { spawn "/home/jason/.config/scripts/screenshot.sh" "region"; }
+    Mod+Print       { spawn "/home/jason/.config/scripts/screenshot.sh" "region"; }
+    Mod+Shift+Print { spawn "/home/jason/.config/scripts/screenshot.sh" "screen"; }
+    Ctrl+Print      { screenshot-screen; }
+    Alt+Print       { screenshot-window; }
 
     // Hardware Controls (Volume, Brightness, Media)
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"; }

@@ -19,6 +19,7 @@
     # write nvim-pack-lock.json and edits apply without a rebuild
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/niri/"= { source = ./niri; recursive = true;};
+    ".config/scripts/"= { source = ./scripts; recursive = true;};
     ".config/waybar/"= { source = ./waybar; recursive = true;};
     ".config/wofi/"= { source = ./wofi; recursive = true;};
     ".config/yazi/"= { source = ./yazi; recursive = true;};
