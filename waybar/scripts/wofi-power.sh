@@ -13,8 +13,14 @@ selected=$(echo -e "$entries" | wofi \
     --cache-file /dev/null)
 
 case "$selected" in
-    *"Lock"*)     swaylock -f ;;
-    *"Logout"*)   niri msg action quit --skip-confirmation 2>/dev/null || pkill -SIGTERM niri ;;
+    # Goes through swayidle's `lock` handler, so it uses the same locker as idle/lid
+    *"Lock"*)     loginctl lock-session ;;
+    *"Logout"*)
+        case "${XDG_CURRENT_DESKTOP:-}" in
+            *Hyprland*) hyprctl dispatch 'hl.dsp.exit()' ;;
+            *niri*)     niri msg action quit --skip-confirmation ;;
+            *)          false ;;
+        esac || loginctl terminate-session "${XDG_SESSION_ID:-}" ;;
     *"Suspend"*)  systemctl suspend ;;
     *"Reboot"*)   systemctl reboot ;;
     *"Shutdown"*) systemctl poweroff ;;
