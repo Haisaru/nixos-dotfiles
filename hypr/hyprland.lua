@@ -15,20 +15,10 @@
 -- jumps to global workspace N wherever it lives. The "m+1"/"m-1" relative
 -- workspace syntax (workspace on the CURRENT monitor) is the real analog
 -- to niri's focus-workspace-down/up, used further down.
---
--- A HANDFUL OF DISPATCHERS DON'T HAVE A CONFIRMED hl.dsp.* NAME YET
--- (monitor focus/move, centerwindow, dpms) since the Lua API is very new
--- and not fully documented at every corner. Those binds below shell out to
--- `hyprctl dispatch <name>` instead, which is guaranteed correct because it
--- calls the same underlying dispatcher table the old .conf format used -
--- only the config-authoring layer changed, not the dispatchers themselves.
--- Swap them for native hl.dsp.* calls once you've confirmed the exact name
--- (check :Dispatchers on the wiki or your editor's hl.* LSP completions).
 
 local mainMod = "SUPER"
 local term = "kitty"
 local launcher = "fuzzel"
-local browser = "librewolf"
 
 cursor = {
     enable_hyprcursor = false,
@@ -171,10 +161,7 @@ hl.layer_rule({ name = "blur-notifications", match = { namespace = "^notificatio
 ----------------------
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(term))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(term .. " -e yazi"))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(term .. " -e nvim"))
-hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(term .. " -e btop"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("/home/jason/.config/waybar/scripts/wofi-power.sh"))
 
 -- Screen lock - pick a locker (hyprlock recommended) and uncomment.
@@ -182,7 +169,7 @@ hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("/home/jason/.config/waybar/scripts/w
 
 -- Window management
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprctl dispatch centerwindow"))
+hl.bind(mainMod .. " + C", hl.dsp.window.center())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
@@ -240,25 +227,24 @@ hl.bind(mainMod .. " + SHIFT + U", hl.dsp.window.move({ workspace = "m+1" }))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.window.move({ workspace = "m-1" }))
 
 -- ── Monitors ─────────────────────────────────────────────────────────────
--- Using the hyprctl dispatch fallback here (see note at top of file).
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.exec_cmd("hyprctl dispatch focusmonitor l"))
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch focusmonitor r"))
-hl.bind(mainMod .. " + CTRL + H", hl.dsp.exec_cmd("hyprctl dispatch focusmonitor l"))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("hyprctl dispatch focusmonitor r"))
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.focus({ monitor = "l" }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.focus({ monitor = "r" }))
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ monitor = "l" }))
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ monitor = "r" }))
 
 -- Send the focused window to another monitor
-hl.bind(mainMod .. " + CTRL + SHIFT + left", hl.dsp.exec_cmd("hyprctl dispatch movewindow mon:l"))
-hl.bind(mainMod .. " + CTRL + SHIFT + right", hl.dsp.exec_cmd("hyprctl dispatch movewindow mon:r"))
-hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.exec_cmd("hyprctl dispatch movewindow mon:l"))
-hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprctl dispatch movewindow mon:r"))
+hl.bind(mainMod .. " + CTRL + SHIFT + left", hl.dsp.window.move({ monitor = "l" }))
+hl.bind(mainMod .. " + CTRL + SHIFT + right", hl.dsp.window.move({ monitor = "r" }))
+hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.window.move({ monitor = "l" }))
+hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.window.move({ monitor = "r" }))
 
 -- Send the whole current workspace to another monitor
-hl.bind(mainMod .. " + ALT + left", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor l"))
-hl.bind(mainMod .. " + ALT + right", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor r"))
-hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor l"))
-hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor r"))
+hl.bind(mainMod .. " + ALT + left", hl.dsp.workspace.move({ monitor = "l" }))
+hl.bind(mainMod .. " + ALT + right", hl.dsp.workspace.move({ monitor = "r" }))
+hl.bind(mainMod .. " + ALT + H", hl.dsp.workspace.move({ monitor = "l" }))
+hl.bind(mainMod .. " + ALT + L", hl.dsp.workspace.move({ monitor = "r" }))
 
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprctl dispatch dpms toggle"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.dpms({ action = "toggle" }))
 
 -- Scroll bindings (workspace switching on current monitor)
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
