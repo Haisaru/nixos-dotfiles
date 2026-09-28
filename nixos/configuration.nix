@@ -246,6 +246,7 @@
     hunspell
     hunspellDicts.en_CA
     hunspellDicts.en_US
+    jabref
     kdePackages.dolphin
     libreoffice-qt
     librewolf
