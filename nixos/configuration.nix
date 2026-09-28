@@ -186,10 +186,19 @@
       };
     };
   };
+  # Weekly GC keeping the last 16 generations of the system and user profiles
   nix.gc = {
     automatic = true;
-    options = "--delete-older-than 14d";
+    options = "";
   };
+  systemd.services.nix-gc.preStart = ''
+    ${config.nix.package}/bin/nix-env -p /nix/var/nix/profiles/system --delete-generations +16
+    for p in home-manager profile; do
+      ${pkgs.util-linux}/bin/runuser -u jason -- \
+        ${config.nix.package}/bin/nix-env -p /home/jason/.local/state/nix/profiles/$p --delete-generations +16
+    done
+  '';
+  boot.loader.systemd-boot.configurationLimit = 16;
 
 
   # You can use https://search.nixos.org/ to find more packages (and options).
