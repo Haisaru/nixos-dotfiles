@@ -1,5 +1,7 @@
 require("neo-tree").setup({
-  hijack_netrw_behaviour = "open_current",
+  filesystem = {
+    hijack_netrw_behavior = "open_current",
+  },
 })
 
 vim.keymap.set("n", "<C-n>", ":Neotree filesystem toggle left<CR>")

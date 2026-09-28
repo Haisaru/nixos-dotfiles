@@ -174,7 +174,6 @@ hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(term .. " -e yazi"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(term .. " -e nvim"))
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("/home/jason/.config/waybar/scripts/theme-switcher.sh menu"))
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(term .. " -e btop"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("/home/jason/.config/waybar/scripts/wofi-power.sh"))
 

@@ -48,7 +48,6 @@
   # Power Management & Battery Optimization
   # ==========================================
   services.power-profiles-daemon.enable = false;
-  services.thermald.enable = true;
 
   services.tlp = {
     enable = true;
@@ -87,10 +86,7 @@
     };
   };
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
+  powerManagement.enable = true;
 
   # ==========================================
   # Networking & Hostname
@@ -183,14 +179,9 @@
       };
     };
   };
-  system.autoUpgrade = {
-    enable = true;
-    dates = "weekly";
-  };
-
   nix.gc = {
     automatic = true;
-    options = "--delete older-than 14d";
+    options = "--delete-older-than 14d";
   };
 
 
@@ -224,6 +215,7 @@
 
     # Development Tools & Compilers
     cargo
+    clang-tools
     claude-code
     claude-monitor
     claude-powerline
@@ -232,7 +224,9 @@
     gh
     git
     gnumake
+    haskell-language-server
     lazygit
+    lua-language-server
     neovim
     resvg
     rustc

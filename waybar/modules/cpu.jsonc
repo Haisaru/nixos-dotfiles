@@ -11,7 +11,7 @@
 		"min-length": 7,
 		"max-length": 7,
 		"on-click": "kitty -e btop",
-		"on-click-right": "kitty -e htop",
+		"on-click-right": "kitty -e btop",
 		"tooltip": true,
 		"tooltip-format": "CPU Usage: {usage}%\n<i>Click: Open btop</i>"
 	}
