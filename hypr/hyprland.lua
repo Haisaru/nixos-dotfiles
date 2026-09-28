@@ -166,9 +166,6 @@ hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(term .. " -e yazi"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("/home/jason/.config/waybar/scripts/wofi-power.sh"))
 
--- Screen lock - pick a locker (hyprlock recommended) and uncomment.
--- hl.bind("SUPER + ALT + L", hl.dsp.exec_cmd("hyprlock"))
-
 -- Window management
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + C", hl.dsp.window.center())
