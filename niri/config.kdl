@@ -142,8 +142,8 @@ spawn-at-startup "swaybg" "-i" "/home/jason/dotfiles/assets/active.jpg" "-m" "fi
 spawn-at-startup "/home/jason/.config/scripts/clipboard-watch.sh"
 spawn-sh-at-startup "dbus-update-activation-environment --systemd --all"
 spawn-sh-at-startup "xhost +SI:localuser:root 2>/dev/null || true"
-// Lock after 10 min idle, before suspend (incl. lid close), and on loginctl lock-session
-spawn-sh-at-startup "swayidle -w timeout 600 '/home/jason/.config/scripts/swaylock-fancy/swaylock-fancy --daemonize' before-sleep '/home/jason/.config/scripts/swaylock-fancy/swaylock-fancy --daemonize' lock '/home/jason/.config/scripts/swaylock-fancy/swaylock-fancy --daemonize'"
+// Screen off / lock on idle, lid close and loginctl lock-session (see script)
+spawn-at-startup "/home/jason/.config/scripts/idle.sh"
 
 hotkey-overlay {
     skip-at-startup

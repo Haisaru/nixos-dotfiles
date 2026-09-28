@@ -45,8 +45,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/home/jason/.config/scripts/clipboard-watch.sh")
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
     hl.exec_cmd("xhost +SI:localuser:root 2>/dev/null || true")
-    -- Lock after 10 min idle, before suspend (incl. lid close), and on loginctl lock-session
-    hl.exec_cmd("swayidle -w timeout 600 '/home/jason/.config/scripts/swaylock-fancy/swaylock-fancy --daemonize' before-sleep '/home/jason/.config/scripts/swaylock-fancy/swaylock-fancy --daemonize' lock '/home/jason/.config/scripts/swaylock-fancy/swaylock-fancy --daemonize'")
+    -- Screen off / lock on idle, lid close and loginctl lock-session (see script)
+    hl.exec_cmd("/home/jason/.config/scripts/idle.sh")
 end)
 
 ----------------------
