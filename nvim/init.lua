@@ -66,6 +66,7 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("1") },
   { src = "https://github.com/Saghen/blink.nvim" },
   { src = "https://github.com/Saghen/blink.indent" },
+  { src = "https://github.com/windwp/nvim-autopairs" },
 
   -- lsp
   { src = "https://github.com/neovim/nvim-lspconfig" },

@@ -21,7 +21,31 @@ require("blink.cmp").setup({
   -- C-k: Toggle signature help (if signature.enabled = true)
   --
   -- See :h blink-cmp-config-keymap for defining your own keymap
-  keymap = { preset = "default" },
+  keymap = {
+    preset = "super-tab",
+    -- Same as the super-tab preset's <Tab>, but with an extra fallback: if
+    -- there's no completion/snippet to act on and the cursor is right
+    -- before a closing delimiter, jump over it instead of inserting a tab.
+    ["<Tab>"] = {
+      function(cmp)
+        if cmp.snippet_active() then
+          return cmp.accept()
+        end
+        return cmp.select_and_accept()
+      end,
+      "snippet_forward",
+      function()
+        local line = vim.api.nvim_get_current_line()
+        local col = vim.api.nvim_win_get_cursor(0)[2]
+        local next_char = line:sub(col + 1, col + 1)
+        if next_char:match("[%)%]}\"'`]") then
+          vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], col + 1 })
+          return true
+        end
+      end,
+      "fallback",
+    },
+  },
   appearance = {
     nerd_font_variant = "mono",
   },

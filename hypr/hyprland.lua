@@ -40,16 +40,10 @@ cursor = {
 -- Run `hyprctl monitors` for exact names/modes. position is "XxY" (a
 -- literal lowercase x between the numbers), not a comma.
 hl.monitor({
-    output = "eDP-1",
+    output = "HDMI-A-1",
     mode = "1920x1200@60",
     position = "0x0",
-    scale = 1.25,
-})
-hl.monitor({
-    output = "HDMI-A-1",
-    mode = "2560x1440@59.951",
-    position = "1536x0",
-    scale = 1,
+    scale = 1.0,
 })
 -- Catch-all for anything else you plug in
 hl.monitor({
