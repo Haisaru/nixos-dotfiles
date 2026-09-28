@@ -1,20 +1,12 @@
 -- Hyprland Lua configuration (native hl.* API, Hyprland 0.55+)
 -- Wiki: https://wiki.hypr.land/Configuring/Start/
 --
--- MODIFIER GRAMMAR (same convention as your niri config):
 --   mainMod                -> focus / act on the focused window
 --   mainMod + SHIFT        -> move the window
 --   mainMod + CTRL         -> monitors
 --   mainMod + CTRL + SHIFT -> send the window to another monitor
 --   mainMod + ALT          -> act on the whole workspace
--- Non-directional chords (mainMod + F, mainMod + R, ...) are plain mnemonics.
---
--- WORKSPACE MODEL DIFFERENCE FROM NIRI (same caveat as the .conf version):
--- niri addresses "whichever workspace is currently 2nd on THIS monitor".
--- Hyprland workspaces are a fixed global numbering. mainMod + 1..9 below
--- jumps to global workspace N wherever it lives. The "m+1"/"m-1" relative
--- workspace syntax (workspace on the CURRENT monitor) is the real analog
--- to niri's focus-workspace-down/up, used further down.
+--   Non-directional chords (mainMod + F, mainMod + R, ...) are plain mnemonics.
 
 local mainMod = "SUPER"
 local term = "kitty"
@@ -74,7 +66,7 @@ hl.config({
         layout = "dwindle",
     },
     decoration = {
-        rounding = 0,              -- strict square aesthetic
+        rounding = 0,
         rounding_power = 2,
         active_opacity = 1.0,
         inactive_opacity = 1.0,
@@ -88,7 +80,7 @@ hl.config({
             enabled = true,
             size = 3,
             passes = 3,
-            vibrancy = 1.15,        -- rough analog of niri's saturation
+            vibrancy = 1.15,
         },
     },
     animations = {
@@ -199,21 +191,20 @@ hl.bind(mainMod .. " + equal", hl.dsp.window.resize({ x = 40, y = 0, relative = 
 hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + SHIFT + equal", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
 
--- Split direction toggle (dwindle) - closest analog to niri's width presets
+-- Split direction toggle (dwindle)
 hl.bind(mainMod .. " + R", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 
--- Groups (closest analog to niri's consume/expel-into-column)
+-- Groups
 hl.bind(mainMod .. " + comma", hl.dsp.group.toggle())
 
--- Workspaces - GLOBAL numbers, not per-monitor like niri
+-- Workspaces
 for i = 1, 9 do
     hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
     hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
 
 -- Next/previous workspace ON THE CURRENT MONITOR - the real analog to
--- niri's focus-workspace-down/up
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
 hl.bind(mainMod .. " + Page_Down", hl.dsp.focus({ workspace = "m+1" }))
 hl.bind(mainMod .. " + Page_Up", hl.dsp.focus({ workspace = "m-1" }))
@@ -270,7 +261,6 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
--- Quit session - hl.dsp.exit() has no confirmation dialog, same caveat as
--- the .conf version: niri's `quit` asked first, this does not.
+-- Quit session - hl.dsp.exit() has no confirmation dialog
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
 hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
