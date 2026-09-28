@@ -39,10 +39,16 @@ setopt INTERACTIVE_COMMENTS
 # ──────────────────────────────────────────────────────────────
 # Completion
 # ──────────────────────────────────────────────────────────────
-autoload -Uz compinit
-compinit -d "$HOME/.cache/zcompdump"
+# Emacs keymap must be selected before zsh-autocomplete binds its keys
+bindkey -e
 
-zstyle ':completion:*' menu select
+# zsh-autocomplete — live completion list as you type (runs compinit itself)
+for _ac in "$HOME/.nix-profile/share" "/run/current-system/sw/share"; do
+    [[ -f "$_ac/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]] &&
+        source "$_ac/zsh-autocomplete/zsh-autocomplete.plugin.zsh" && break
+done
+unset _ac
+
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' group-name ''
@@ -77,14 +83,13 @@ _load_plugin "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 unset -f _load_plugin
 
 # Tune autosuggestion style
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history)  # completion strategy clashes with zsh-autocomplete
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#6b4fa0,underline"
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 # ──────────────────────────────────────────────────────────────
 # Key Bindings
 # ──────────────────────────────────────────────────────────────
-bindkey -e
 bindkey '^[[A'  up-line-or-search
 bindkey '^[[B'  down-line-or-search
 bindkey '^[[H'  beginning-of-line
@@ -94,7 +99,6 @@ bindkey '^[[1;5C' forward-word    # Ctrl+Right
 bindkey '^[[1;5D' backward-word   # Ctrl+Left
 bindkey '^U'    backward-kill-line
 bindkey '^K'    kill-line
-bindkey '^[[Z'  reverse-menu-complete  # Shift+Tab
 
 # ──────────────────────────────────────────────────────────────
 # Aliases — Navigation

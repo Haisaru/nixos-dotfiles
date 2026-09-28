@@ -145,6 +145,14 @@
   # ==========================================
   programs.zsh.enable = true;
 
+  # Expose zsh plugin dirs under /run/current-system/sw/share for .zshrc
+  environment.pathsToLink = [
+    "/share/zsh-autocomplete"
+    "/share/zsh-autosuggestions"
+    "/share/zsh-syntax-highlighting"
+    "/share/zsh-powerlevel10k"
+  ];
+
   users.users.jason = {
     isNormalUser = true;
     description = "jason";
