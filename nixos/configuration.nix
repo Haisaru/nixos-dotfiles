@@ -270,10 +270,14 @@
     satty
     slurp
     swaybg
+    imagemagick
+    jq
+    swayidle
     swaylock
     trash-cli
     waybar
     wl-clipboard
+    wlr-randr
     wofi
     xdg-utils
     
