@@ -27,5 +27,24 @@
     ".p10k.zsh".source = ./.p10k.zsh;
   };
 
+  # System-wide dark mode: portals, libadwaita, and browsers read color-scheme
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
+  };
+
   programs.home-manager.enable = true;
 }

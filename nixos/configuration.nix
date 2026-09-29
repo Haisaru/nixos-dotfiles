@@ -35,6 +35,7 @@
 
   programs.niri.enable = true;
   programs.hyprland.enable = true;
+  programs.dconf.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -255,7 +256,6 @@
     hunspell
     hunspellDicts.en_CA
     hunspellDicts.en_US
-    jabref
     kdePackages.dolphin
     libreoffice-qt
     librewolf
@@ -264,6 +264,7 @@
     sioyek
     vesktop
     zathura
+    zotero
 
     # Wayland & Desktop Utilities
     bibata-cursors
