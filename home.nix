@@ -46,5 +46,10 @@
     style.name = "adwaita-dark";
   };
 
+  # KDE apps (Dolphin) take text/view colors from kdeglobals, not the Qt style;
+  # without it they fall back to Breeze Light and render dark text on dark bg
+  xdg.configFile."kdeglobals".source =
+    "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
+
   programs.home-manager.enable = true;
 }

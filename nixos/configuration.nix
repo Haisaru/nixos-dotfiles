@@ -231,6 +231,7 @@
     zsh-syntax-highlighting
 
     # Development Tools & Compilers
+    7zip-rar
     cargo
     clang-tools
     claude-code
