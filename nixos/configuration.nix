@@ -262,6 +262,7 @@
     mpv
     ncspot
     sioyek
+    taskwarrior3
     vesktop
     zathura
     zotero
