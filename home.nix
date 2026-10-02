@@ -42,8 +42,12 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "adwaita";
-    style.name = "adwaita-dark";
+    # kde platform theme applies the kdeglobals palette below; adwaita ignores it
+    platformTheme.name = "kde";
+    style = {
+      name = "breeze";
+      package = pkgs.kdePackages.breeze;
+    };
   };
 
   # KDE apps (Dolphin) take text/view colors from kdeglobals, not the Qt style;
