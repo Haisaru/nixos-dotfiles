@@ -231,7 +231,7 @@
     zsh-syntax-highlighting
 
     # Development Tools & Compilers
-    7zip-rar
+    _7zip-zstd
     cargo
     clang-tools
     claude-code
@@ -266,7 +266,6 @@
     taskwarrior3
     vesktop
     zathura
-    zotero
 
     # Wayland & Desktop Utilities
     bibata-cursors
