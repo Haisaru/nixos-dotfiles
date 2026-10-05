@@ -47,3 +47,15 @@
 #idle_inhibitor.deactivated {
 	color: @muted;
 }
+
+#custom-notifications.notification {
+	color: @accent;
+}
+
+#custom-notifications.dnd {
+	color: @muted;
+}
+
+#custom-notifications:hover {
+	color: @fg;
+}

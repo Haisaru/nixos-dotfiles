@@ -1,0 +1,4 @@
+# Popups are hidden (but still queued) while this mode is active;
+# toggled from the waybar notification module
+[mode=do-not-disturb]
+invisible=1

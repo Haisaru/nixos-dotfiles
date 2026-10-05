@@ -36,6 +36,7 @@
 		"battery",
     "bluetooth",
     "network",
+		"custom/notifications",
 		"custom/power"
 	]
 }
