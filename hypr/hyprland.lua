@@ -160,6 +160,7 @@ hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("/home/jason/.config/waybar/scripts/w
 
 -- Window management
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + C", hl.dsp.window.center())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))

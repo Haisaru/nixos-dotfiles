@@ -277,6 +277,7 @@
     libnotify
     mako
     networkmanagerapplet
+    geteduroam-cli
     pavucontrol
     playerctl
     satty
@@ -301,5 +302,13 @@
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
   };
+  # home-manager's qt vars only reach shells; PAM session vars also reach
+  # Hyprland and apps it launches, so Dolphin picks up the kdeglobals palette
+  environment.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "kde";
+    QT_STYLE_OVERRIDE = "breeze";
+  };
+  # Lets Qt find the KDE platform theme plugin home-manager installs
+  environment.profileRelativeSessionVariables.QT_PLUGIN_PATH = [ "/lib/qt-6/plugins" ];
   system.stateVersion = "26.05"; # Do not touch
 }

@@ -12,10 +12,11 @@
 		"min-length": 2,
 		"max-length": 2,
 		"on-click": "kitty -e ~/.config/waybar/scripts/network.sh",
-		"on-click-right": "~/.config/waybar/scripts/network.sh off",
-		"tooltip-format": "<b>Gateway</b>: {gwaddr}",
-		"tooltip-format-wifi": "<b>Network</b>: {essid}\n<b>IP Addr</b>: {ipaddr}/{cidr}\n<b>Strength</b>: {signalStrength}%\n<b>Frequency</b>: {frequency} GHz",
-		"tooltip-format-disconnected": "Wi-Fi Disconnected",
+		"on-click-right": "nm-connection-editor",
+		"on-click-middle": "~/.config/waybar/scripts/network.sh toggle",
+		"tooltip-format": "<b>Gateway</b>: {gwaddr}\n\n<i>Left: connect  Right: edit  Middle: on/off</i>",
+		"tooltip-format-wifi": "<b>Network</b>: {essid}\n<b>IP Addr</b>: {ipaddr}/{cidr}\n<b>Strength</b>: {signalStrength}%\n<b>Frequency</b>: {frequency} GHz\n\n<i>Left: connect  Right: edit  Middle: on/off</i>",
+		"tooltip-format-disconnected": "Wi-Fi Disconnected\n\n<i>Left: connect  Right: edit  Middle: on/off</i>",
 		"tooltip-format-disabled": "Wi-Fi Off",
 		"tooltip-format-ethernet": "<b>Interface</b>: {ifname}"
 	}
