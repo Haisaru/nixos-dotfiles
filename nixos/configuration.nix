@@ -246,6 +246,7 @@
     lazygit
     lua-language-server
     neovim
+    python3
     resvg
     rustc
     texliveFull
