@@ -83,6 +83,18 @@
 	color: @subtext;
 }
 
+#tray {
+	padding: 0 8px 0 4px;
+}
+
+#tray > .passive {
+	-gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+	-gtk-icon-effect: highlight;
+}
+
 #custom-power {
 	padding: 0 4px 0 8px;
 	color: @accent;

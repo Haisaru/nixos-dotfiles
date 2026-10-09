@@ -29,6 +29,7 @@
 	],
 
 	"modules-right": [
+		"tray",
 		"cpu",
 		"memory",
 		"group/pulseaudio",
