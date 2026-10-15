@@ -19,7 +19,8 @@
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/niri/"= { source = ./niri; recursive = true;};
     ".config/scripts/"= { source = ./scripts; recursive = true;};
-    ".config/task/"= { source = ./task; recursive = true;};
+    # Out-of-store so `task context define` / `task config` can write to it
+    ".config/task/taskrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/task/taskrc";
     ".config/waybar/"= { source = ./waybar; recursive = true;};
     ".config/wofi/"= { source = ./wofi; recursive = true;};
     ".config/yazi/"= { source = ./yazi; recursive = true;};
