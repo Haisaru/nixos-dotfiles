@@ -50,10 +50,14 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/home/jason/.config/scripts/idle.sh")
 end)
 
--- Waybar doesn't draw on hotplugged monitors until something forces a
--- relayout, so restart it once the new output has settled.
+-- Waybar doesn't redraw correctly when outputs are hotplugged (new monitors
+-- stay empty, and the remaining bar vanishes on unplug), so restart it on
+-- both events once the layout has settled.
 hl.on("monitor.added", function()
-    hl.exec_cmd("sh -c 'pkill -x waybar; sleep 1; waybar'")
+    hl.exec_cmd("/home/jason/.config/waybar/scripts/restart.sh")
+end)
+hl.on("monitor.removed", function()
+    hl.exec_cmd("/home/jason/.config/waybar/scripts/restart.sh")
 end)
 
 ----------------------
