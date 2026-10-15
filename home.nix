@@ -16,11 +16,10 @@
     ".config/hypr/"= { source = ./hypr; recursive = true;};
     ".config/kitty/"= { source = ./kitty; recursive = true;};
     ".config/mako/"= { source = ./mako; recursive = true;};
-    # Linked straight to the repo (not the read-only store) so vim.pack can
-    # write nvim-pack-lock.json and edits apply without a rebuild
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/niri/"= { source = ./niri; recursive = true;};
     ".config/scripts/"= { source = ./scripts; recursive = true;};
+    ".config/task/"= { source = ./task; recursive = true;};
     ".config/waybar/"= { source = ./waybar; recursive = true;};
     ".config/wofi/"= { source = ./wofi; recursive = true;};
     ".config/yazi/"= { source = ./yazi; recursive = true;};

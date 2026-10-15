@@ -1,0 +1,22 @@
+# Taskwarrior config — see `man taskrc` for all options
+
+# Keep task data out of $HOME, following XDG
+data.location=~/.local/share/task
+
+# Built-in dark theme
+include dark-256.theme
+
+# Don't ask before bulk modify/delete of a few tasks
+confirmation=yes
+bulk=5
+
+# Week starts on Monday, ISO-ish dates
+weekstart=monday
+dateformat=Y-M-D
+dateformat.report=Y-M-D
+
+# Nag less
+nag=
+
+# Default report when running bare `task`
+default.command=next
