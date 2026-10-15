@@ -29,6 +29,7 @@
 	],
 
 	"modules-right": [
+		"custom/ime",
 		"tray",
 		"cpu",
 		"memory",

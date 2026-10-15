@@ -138,6 +138,7 @@ blur {
 // Autostart processes
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
+spawn-at-startup "fcitx5" "-d" "-r"
 spawn-at-startup "swaybg" "-i" "/home/jason/dotfiles/assets/active.jpg" "-m" "fill"
 spawn-at-startup "/home/jason/.config/scripts/clipboard-watch.sh"
 spawn-sh-at-startup "dbus-update-activation-environment --systemd --all"

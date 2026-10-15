@@ -19,6 +19,8 @@
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/niri/"= { source = ./niri; recursive = true;};
     ".config/scripts/"= { source = ./scripts; recursive = true;};
+    # Single file so Rime can still write its build/ and user dicts beside it
+    ".local/share/fcitx5/rime/default.custom.yaml".source = ./rime/default.custom.yaml;
     # Out-of-store so `task context define` / `task config` can write to it
     ".config/task/taskrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/task/taskrc";
     ".config/waybar/"= { source = ./waybar; recursive = true;};

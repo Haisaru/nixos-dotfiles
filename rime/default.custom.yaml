@@ -1,0 +1,4 @@
+# Rime overrides for fcitx5-rime; redeploy from the fcitx5 tray menu after editing
+patch:
+  schema_list:
+    - schema: luna_pinyin_simp
