@@ -49,6 +49,12 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/home/jason/.config/scripts/idle.sh")
 end)
 
+-- Waybar doesn't draw on hotplugged monitors until something forces a
+-- relayout, so restart it once the new output has settled.
+hl.on("monitor.added", function()
+    hl.exec_cmd("sh -c 'pkill -x waybar; sleep 1; waybar'")
+end)
+
 ----------------------
 ---- LOOK & FEEL    ----
 ----------------------
