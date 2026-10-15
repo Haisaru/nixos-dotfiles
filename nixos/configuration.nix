@@ -293,6 +293,7 @@
     ncspot
     sioyek
     taskwarrior3
+    timewarrior
     vesktop
     zathura
 

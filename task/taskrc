@@ -20,3 +20,4 @@ nag=
 
 # Default report when running bare `task`
 default.command=next
+news.version=3.5.0
