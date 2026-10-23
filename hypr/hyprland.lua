@@ -21,10 +21,18 @@ cursor = {
 ----------------------
 -- Run `hyprctl monitors` for exact names/modes. position is "XxY" (a
 -- literal lowercase x between the numbers), not a comma.
+-- Laptop on the left; at scale 1.5 it's 1280 logical px wide, so the
+-- external monitor starts at x=1280.
+hl.monitor({
+    output = "eDP-1",
+    mode = "preferred",
+    position = "0x0",
+    scale = 1.5,
+})
 hl.monitor({
     output = "HDMI-A-1",
     mode = "1920x1200@60",
-    position = "0x0",
+    position = "1280x0",
     scale = 1.0,
 })
 -- Catch-all for anything else you plug in
