@@ -58,5 +58,23 @@
   xdg.configFile."kdeglobals".source =
     "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
 
+  programs.git = {
+    enable = true;
+    settings.user = {
+      name = "jason";
+      email = "jasonli2442@gmail.com";
+    };
+  };
+
+  # Regenerated on each switch, so the helper never points at a GC'd gh
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+    settings = {
+      git_protocol = "https";
+      aliases.co = "pr checkout";
+    };
+  };
+
   programs.home-manager.enable = true;
 }
