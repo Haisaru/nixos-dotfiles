@@ -36,6 +36,11 @@
   programs.niri.enable = true;
   programs.hyprland.enable = true;
   programs.dconf.enable = true;
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   xdg.portal = {
     enable = true;

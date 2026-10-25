@@ -181,10 +181,16 @@ pair_device() {
 
 	debug "Pairing...\n"
 
-	if ! timeout $TIMEOUT bluetoothctl pair "$ADDRESS" >/dev/null; then
+	# Register an agent so pairing doesn't fail with "No agent available";
+	# NoInputNoOutput makes it a just-works pairing with no passkey prompt
+	if ! timeout $TIMEOUT bluetoothctl --agent NoInputNoOutput \
+		pair "$ADDRESS" >/dev/null; then
 		notify-send "Bluetooth" "Failed to pair" -i "package-purge"
 		exit 1
 	fi
+
+	# Trusted devices (e.g. mice, keyboards) can reconnect on their own
+	bluetoothctl trust "$ADDRESS" >/dev/null
 }
 
 connect_device() {
