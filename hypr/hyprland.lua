@@ -48,7 +48,7 @@ hl.monitor({
 ----------------------
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
-    hl.exec_cmd("mako")
+    hl.exec_cmd("swaync")
     hl.exec_cmd("fcitx5 -d -r")
     hl.exec_cmd("swaybg -i /home/jason/dotfiles/assets/active.jpg -m fill")
     hl.exec_cmd("/home/jason/.config/scripts/clipboard-watch.sh")
@@ -167,7 +167,7 @@ hl.window_rule({
 -- page for this API revision.
 hl.layer_rule({ name = "blur-waybar", match = { namespace = "^waybar$" }, blur = true })
 hl.layer_rule({ name = "blur-launcher", match = { namespace = "^launcher$" }, blur = true })
-hl.layer_rule({ name = "blur-notifications", match = { namespace = "^notifications$" }, blur = true })
+hl.layer_rule({ name = "blur-notifications", match = { namespace = "^swaync-(notification-window|control-center)$" }, blur = true })
 
 ----------------------
 ---- KEYBINDINGS    ----

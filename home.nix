@@ -30,7 +30,7 @@ in
     ".config/fuzzel/"= { source = ./fuzzel; recursive = true;};
     ".config/hypr/"= { source = ./hypr; recursive = true;};
     ".config/kitty/"= { source = ./kitty; recursive = true;};
-    ".config/mako/"= { source = ./mako; recursive = true;};
+    ".config/swaync/"= { source = ./swaync; recursive = true;};
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/niri/"= { source = ./niri; recursive = true;};
     ".config/scripts/"= { source = ./scripts; recursive = true;};

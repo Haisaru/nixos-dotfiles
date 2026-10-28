@@ -1,0 +1,119 @@
+/* Colors mirror waybar/colors.css */
+@define-color background #18202b;
+@define-color second-background #243242;
+@define-color hover-background #30485a;
+@define-color active-background #426176;
+@define-color text #d9f0ff;
+@define-color subtext #9bb9cc;
+@define-color borders #9bdcff;
+@define-color urgent #ff8fa3;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+/* ── Popups ───────────────────────────────────────── */
+
+.notification-row {
+  outline: none;
+  margin: 4px 0;
+}
+
+.notification {
+  background: alpha(@background, 0.92);
+  border: 1px solid @second-background;
+  color: @text;
+  padding: 8px;
+}
+
+.notification.critical {
+  border-color: @urgent;
+}
+
+.notification-content .summary {
+  font-weight: bold;
+  color: @text;
+}
+
+.notification-content .body,
+.notification-content .time {
+  color: @subtext;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  background: @hover-background;
+}
+
+.notification-action {
+  background: @second-background;
+  color: @text;
+  border: none;
+}
+
+.close-button {
+  background: @second-background;
+  color: @text;
+  border: none;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.close-button:hover {
+  background: @urgent;
+  color: @background;
+}
+
+/* ── Control center (the tray panel) ──────────────── */
+
+.control-center {
+  background: alpha(@background, 0.92);
+  border: 1px solid @borders;
+  color: @text;
+  padding: 8px;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  color: @subtext;
+  opacity: 0.6;
+}
+
+.widget-title {
+  margin: 4px 4px 8px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.widget-title > button {
+  background: @second-background;
+  color: @text;
+  border: none;
+  padding: 2px 10px;
+}
+
+.widget-title > button:hover {
+  background: @urgent;
+  color: @background;
+}
+
+.widget-dnd {
+  margin: 0 4px 8px;
+}
+
+.widget-dnd > switch {
+  background: @second-background;
+}
+
+.widget-dnd > switch:checked {
+  background: @active-background;
+}
+
+.widget-dnd > switch slider {
+  background: @text;
+}

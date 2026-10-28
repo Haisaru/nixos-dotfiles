@@ -137,7 +137,7 @@ blur {
 
 // Autostart processes
 spawn-at-startup "waybar"
-spawn-at-startup "mako"
+spawn-at-startup "swaync"
 spawn-at-startup "fcitx5" "-d" "-r"
 spawn-at-startup "swaybg" "-i" "/home/jason/dotfiles/assets/active.jpg" "-m" "fill"
 spawn-at-startup "/home/jason/.config/scripts/clipboard-watch.sh"
@@ -212,7 +212,7 @@ layer-rule {
 }
 
 layer-rule {
-    match namespace="^notifications$" // mako
+    match namespace="^swaync-(notification-window|control-center)$"
     background-effect {
         blur true
     }

@@ -310,7 +310,7 @@
     fuzzel
     grim
     libnotify
-    mako
+    swaynotificationcenter
     networkmanagerapplet
     geteduroam-cli
     pavucontrol

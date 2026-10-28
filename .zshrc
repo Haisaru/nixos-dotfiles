@@ -6,7 +6,10 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # ──────────────────────────────────────────────────────────────
 # PATH & Environment
 # ──────────────────────────────────────────────────────────────
-export PATH="/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+# Skip inside nix-shell so its packages stay ahead of the system ones
+if [[ -z "$IN_NIX_SHELL" ]]; then
+    export PATH="/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+fi
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="bat --paging=always"
