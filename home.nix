@@ -1,5 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  # Explicit list since vim.desktop/nvim.desktop claim many text/* subtypes
+  # directly, which would otherwise win over a text/plain-only default
+  textMimeTypes = [
+    "text/plain" "text/markdown" "text/x-log" "text/csv" "text/x-makefile"
+    "text/x-c" "text/x-csrc" "text/x-chdr" "text/x-c++" "text/x-c++src" "text/x-c++hdr"
+    "text/x-java" "text/x-python" "text/x-python3" "text/x-script.python"
+    "text/rust" "text/x-go" "text/x-lua" "text/x-tex" "text/x-pascal" "text/x-tcl"
+    "text/x-moc" "text/english" "text/x-nix" "text/x-cmake"
+    "text/css" "text/javascript" "text/xml"
+    "application/x-shellscript" "application/json" "application/xml"
+    "application/toml" "application/x-yaml" "application/yaml"
+    "application/javascript" "application/x-desktop"
+  ];
+in
 {
   home.username = "jason";
   home.homeDirectory = "/home/jason";
@@ -55,8 +70,31 @@
 
   # KDE apps (Dolphin) take text/view colors from kdeglobals, not the Qt style;
   # without it they fall back to Breeze Light and render dark text on dark bg
-  xdg.configFile."kdeglobals".source =
-    "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
+  # TerminalApplication: Dolphin runs Terminal=true .desktop files in konsole
+  # unless told otherwise, and konsole isn't installed
+  xdg.configFile."kdeglobals".text =
+    builtins.replaceStrings [ "[General]\n" ] [ "[General]\nTerminalApplication=kitty\nTerminalService=kitty.desktop\n" ]
+      (builtins.readFile "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors");
+
+  # Opens text files in nvim inside a fresh kitty window when double-clicked
+  xdg.desktopEntries.nvim-kitty = {
+    name = "Neovim (kitty)";
+    genericName = "Text Editor";
+    exec = "kitty -e nvim %F";
+    icon = "nvim";
+    terminal = false;
+    noDisplay = true;
+    mimeType = textMimeTypes;
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications =
+      lib.genAttrs textMimeTypes (_: "nvim-kitty.desktop") // {
+        "x-scheme-handler/discord" = "vesktop.desktop";
+        "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
+      };
+  };
 
   programs.git = {
     enable = true;
