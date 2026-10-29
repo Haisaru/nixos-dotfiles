@@ -280,6 +280,7 @@
     lua-language-server
     neovim
     python3
+    ruff
     resvg
     rustc
     texliveFull
