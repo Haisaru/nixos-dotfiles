@@ -110,6 +110,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
   time.hardwareClockInLocalTime = false;
 
+  # libstdc++'s std::chrono tzdb (used by waybar's clock) only looks in
+  # /usr/share/zoneinfo and otherwise falls back to its stale built-in copy.
+  systemd.tmpfiles.rules = [ "L+ /usr/share/zoneinfo - - - - /etc/zoneinfo" ];
+
   # Keyboard layout
   services.xserver.xkb = {
     layout = "us";
