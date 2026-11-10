@@ -47,12 +47,11 @@ hl.monitor({
 ---- AUTOSTART      ----
 ----------------------
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("swaync")
+    hl.exec_cmd("/home/jason/.config/waybar/scripts/restart.sh")
     hl.exec_cmd("fcitx5 -d -r")
     hl.exec_cmd("swaybg -i /home/jason/dotfiles/assets/active.jpg -m fill")
     hl.exec_cmd("/home/jason/.config/scripts/clipboard-watch.sh")
-    hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+    hl.exec_cmd("dbus-update-activation-environment --systemd --all && systemctl --user reset-failed swaync; systemctl --user start swaync")
     hl.exec_cmd("xhost +SI:localuser:root 2>/dev/null || true")
     -- Screen off / lock on idle, lid close and loginctl lock-session (see script)
     hl.exec_cmd("/home/jason/.config/scripts/idle.sh")
@@ -99,7 +98,7 @@ hl.config({
             enabled = true,
             size = 3,
             passes = 3,
-            vibrancy = 1.15,
+            vibrancy = 1.0,
         },
     },
     animations = {
