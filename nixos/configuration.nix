@@ -173,6 +173,9 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
+    max-substitution-jobs = 64;
+    http-connections = 128;
+    download-buffer-size = 268435456;
   };
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
@@ -301,6 +304,7 @@
     librewolf
     mpv
     ncspot
+    poppler-utils
     sioyek
     taskwarrior3
     timewarrior

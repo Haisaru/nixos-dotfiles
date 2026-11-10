@@ -21,7 +21,7 @@ output_module() {
 
 update_packages() {
 	echo -e "\e[34mRunning nixos-rebuild switch...\e[39m\n"
-	sudo nixos-rebuild switch
+	sudo nixos-rebuild switch --flake /home/jason/dotfiles
 	notify-send "NixOS Update" "Rebuild finished" -i "system-software-update" 2>/dev/null || true
 	echo -e "\n\e[32mFinished!\e[39m\n"
 	read -rsn 1 -p "Press any key to exit..."
