@@ -4,6 +4,10 @@
 
 { config, lib, pkgs, inputs, ... }:
 
+let
+  # Older nixpkgs for packages broken on unstable; see the comment in flake.nix.
+  pinned = inputs.nixpkgs-pinned.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -131,7 +135,7 @@
       waylandFrontend = true;
       addons = with pkgs; [
         fcitx5-rime
-        inputs.nixpkgs-mozc.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fcitx5-mozc
+        pinned.fcitx5-mozc
         fcitx5-gtk
       ];
       # Default profile; ~/.config/fcitx5/profile overrides it once
@@ -286,6 +290,7 @@
     lazygit
     lua-language-server
     neovim
+    nodejs
     python3
     ruff
     resvg
@@ -306,7 +311,7 @@
     ncspot
     poppler-utils
     sioyek
-    taskwarrior3
+    pinned.taskwarrior3 # broken on unstable; see flake.nix
     timewarrior
     vesktop
     zathura
